@@ -34,4 +34,4 @@ def logon_view(request):
                 return redirect('home')
             else: 
                 msg='invalid credentials'
-        else
+        
