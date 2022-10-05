@@ -4,8 +4,8 @@ from django.contrib.auth import authenticate, login
 
 # Create your views here.
 
-#def index(request): 
-    #return render(request, 'index.html')
+def index(request): 
+    return render(request, 'index.html')
 
 def register(request):
     msg = None
@@ -14,14 +14,14 @@ def register(request):
         if form.is_valid(): 
             user = form.save()
             msg = 'user created'
-            return redirect('login_view') 
+            return redirect('login') 
         else: 
             msg = 'form is not valid'
     else: 
         form = SignUpForm()
     return render(request, 'register.html', {'form': form, 'msg': msg})
 
-def logon_view(request): 
+def login_view(request): 
     form = LoginForm(request.POST or None)
     msg = None
     if request.method == 'POST': 
@@ -29,9 +29,26 @@ def logon_view(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            if user is not None: 
+            if user is not None and user.is_admin: 
                 login(request, user)
-                return redirect('home')
+                return redirect('adminpage')
+            elif user is not None and user.is_customer:
+                login(request, user)
+                return redirect('customer')
+            elif user is not None and user.is_employee:
+                login(request, user)
+                return redirect('employee')   
             else: 
                 msg='invalid credentials'
-        else
+        else:
+            msg = 'error validating form'
+    return render(request, 'login.html', {'form': form, 'msg': msg})
+
+def admin(request):
+    return render(request, 'admin.html')
+
+def customer(request):
+    return render(request, 'customer.html')
+
+def employee(request):
+    return render(request, 'employee.html')
