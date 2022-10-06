@@ -39,7 +39,7 @@ def login_view(request):
                 login(request, user)
                 return redirect('employee')   
             else: 
-<<<<<<< HEAD
+
                 msg='invalid credentials'
         else:
             msg = 'error validating form'
@@ -53,7 +53,3 @@ def customer(request):
 
 def employee(request):
     return render(request, 'employee.html')
-=======
-  
-        
->>>>>>> 7135ddc3fe15dba195dbe8b13e814d706ce658c7
