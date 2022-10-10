@@ -52,3 +52,16 @@ class SignUpForm(UserCreationForm):
     class Meta: 
         model = User
         fields = ('username', 'email', 'password1', 'password2', 'is_admin', 'is_employee', 'is_customer')
+
+class UniversityForm(forms.Form): 
+
+    SUBJECT_CHOICES = (
+        (1, 'web development'),
+        (2, 'systems programming'),
+        (3, 'data science'),
+    )
+
+    name = forms.CharField()
+    age = forms.IntegerField()
+    subject = forms.ChoiceField(choices=SUBJECT_CHOICES)
+    date_of_birth = forms.DateField()
