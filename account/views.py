@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login
 
-from core.forms import UniversityForm
+# from core.forms import UniversityForm
+from .forms import AssignmentForm
 
 # Create your views here.
 
 def index(request): 
-    context = {'form': UniversityForm()}
+    # context = {'form': UniversityForm()}
     return render(request, 'index.html')
 
 def register(request):
@@ -56,3 +57,7 @@ def customer(request):
 
 def employee(request):
     return render(request, 'employee.html')
+
+def create_assignment(request):
+    form = AssignmentForm()
+    return render(request, 'customer.html', {'form': form})

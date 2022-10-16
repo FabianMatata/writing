@@ -1,6 +1,10 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import User
+from .models import Assignment, GENDER_OPTIONS
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit, Layout, Row, Column
+from crispy_forms.bootstrap import InlineRadios, FormActions
 
 class LoginForm(forms.Form): 
     username = forms.CharField(
@@ -53,15 +57,43 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2', 'is_admin', 'is_employee', 'is_customer')
 
-class UniversityForm(forms.Form): 
+# class UniversityForm(forms.Form): 
 
-    SUBJECT_CHOICES = (
-        (1, 'web development'),
-        (2, 'systems programming'),
-        (3, 'data science'),
-    )
+#     SUBJECT_CHOICES = (
+#         (1, 'web development'),
+#         (2, 'systems programming'),
+#         (3, 'data science'),
+#     )
 
-    name = forms.CharField()
-    age = forms.IntegerField()
-    subject = forms.ChoiceField(choices=SUBJECT_CHOICES)
-    date_of_birth = forms.DateField()
+#     name = forms.CharField()
+#     age = forms.IntegerField()
+#     subject = forms.ChoiceField(choices=SUBJECT_CHOICES)
+#     date_of_birth = forms.DateField()
+
+
+class AssignmentForm(forms.ModelForm):
+    gender = forms.ChoiceField(choices=GENDER_OPTIONS,
+                            widget=forms.RadioSelect,
+                            initial='male')
+    class Meta:
+        model = Assignment
+        fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        # self.helper.add_input(Submit('save_assignment', 'Save Assignment'))
+        # self.helper.add_input(Submit('cancel', 'Cancel', css_class='btn btn-danger'))
+
+        self.helper.layout = Layout(
+            Row(
+                Column('name'),
+                Column('email')
+            ),
+            InlineRadios('gender'),
+            'city',
+            FormActions(
+                Submit('save_assignment', 'Save Assignment')
+            )
+        )
