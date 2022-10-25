@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+<!--crispy forms-->
+{% load crispy_forms_tags %}
+
+<!--page content-->
+{% block content %}
+<div class="container">
+    <h5 class="text-center">
+        <strong><i class="fas fa-plus"></i>&nbsp;&enbsp, ADD CANDIDATE</strong>
+    </h5>
+    <hr>
+    <form method="POST" autocomplete="off">
+        {% csrf_token %}
+        <!--Fields-->
+        {{ form.name|as_crispy_field }}
+        {{ form.phone|as_crispy_field }}
+        {{ form.email|as_crispy_field }}
+        {{ form.gender|as_crispy_field }}
+        {{ form.career|as_crispy_field }}
+
+        <!--buttons-->
+
+        <div class="mt-5">
+            <hr>
+            <button type="submit" class="btn btn-warning btn-width">Submit</button>
+            <button type="reset" class="btn btn-secondary ms-2 btn-width">Reset</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

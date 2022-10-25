@@ -29,9 +29,11 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'crispy_forms',
     'src',
+    'crispy_bootstrap5',
+    
 ]
 
-CRISPY_TEMPLATE_PACK = 'uni_form'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
