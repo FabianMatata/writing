@@ -7,11 +7,6 @@
 
  {% load crispy_forms_tags %}
 
- {%  block content %}
-
-    {% csrf_token %}
-
-    {% form|crispy %}
-
- {% endblock content %}
-
+<form method="post" class="my-class">
+    {{ my_formset|crispy }}
+</form>

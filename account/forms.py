@@ -1,3 +1,4 @@
+from tkinter import Widget
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import User
@@ -5,6 +6,10 @@ from .models import Assignment, GENDER_OPTIONS
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Row, Column
 from crispy_forms.bootstrap import InlineRadios, FormActions
+
+from crispy_forms.layout import Submit
+
+from .models import Candidates
 
 class LoginForm(forms.Form): 
     username = forms.CharField(
@@ -97,3 +102,26 @@ class AssignmentForm(forms.ModelForm):
                 Submit('save_assignment', 'Save Assignment')
             )
         )
+
+
+class CandidateForm(forms.ModelForm):
+    class Meta:
+        model = Candidates
+        fields = ('name', 'phone', 'email','gender','career')
+        labels = {
+            'name':'Name',
+            'email':'Email',
+        }
+        #Placeholder
+        widget = {
+            'name':forms.TimeInput(attrs={'placeholder':'Your name'}),
+            'phone':forms.TimeInput(attrs={'placeholder':'Your phone'}),
+            'email':forms.TimeInput(attrs={'placeholder':'Your email'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(CandidateForm, self).__init__(*args, **kwargs)
+        self.fields['gender'].choices = [("", "Select a gender"),] + list(self.fields['gender'].choices)[1:]
+        self.fields['career'].empty_label = "Select an option"
+        self.fields['email'].required = True
+

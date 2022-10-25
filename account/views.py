@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login
 
+from .models import Candidate
+from .forms import CandidateForm
+
 # from core.forms import UniversityForm
 from .forms import AssignmentForm
 
@@ -61,3 +64,32 @@ def employee(request):
 def create_assignment(request):
     form = AssignmentForm()
     return render(request, 'customer.html', {'form': form})
+
+# READ
+def data_read(request):
+    context = {'data_read':Candidate.objects.all()}
+    return render(request, "data_read.html", context)
+# CREATE / UPDATE
+def data_form(request, id = None):
+    if request.method == "POST":
+        if id == None:
+            form = CandidateForm(request.POST)
+        else:
+            candidate = Candidate.objects.get(pk = id)
+            form = CandidateForm(request.POST, instance = candidate)
+        if form.is_valid():
+            form.save()
+        return redirect('/data')
+    else:
+        if id == None:
+            form = CandidateForm()
+        else:
+            candidate = Candidate.object.get(pk = id)
+            form = CandidateForm(instance = candidate)
+        return render(request, "data_form.html", {'form':form})
+
+# DELETE
+def data_delete(request, candidate_id):
+    candidate = Candidate.objects.get(id = candidate_id)
+    candidate.delete()
+    return redirect('/data')
