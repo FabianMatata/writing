@@ -28,7 +28,20 @@
                 <td>{{ data.email }}</td>
                 <td>{{ data.gender }}</td>
                 <td>{{ data.career }}</td>
+                <td class="bg-warning">
+                    <a href="{% url 'data_update' data.id %}" class="btn btn-sm">
+                        <i class="fas fa-pen f-size"></i>
+                    </a>
+                </td>
+                <td class="bg-secondary">
+                    <a href="/data_delete/{{ data.id }}" class="btn btn-sm text-light">
+                        <i class="fas fa-trash-alt f-size"></i>
+                    </a>
+                </td>
+                {% empty %}
+                <td colspan="6" style="color: #ff7f7f;">No records found</td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>
