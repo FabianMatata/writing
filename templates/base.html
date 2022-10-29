@@ -6,12 +6,48 @@
     <title>customer page</title>
     <meta name="referrer" content="no-referrer-when-downgrade">
     <!-- bootstrap CSS only -->
-    <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
 </head>
 
 <body>
+
+    <h1> hello {{ user.username }} your role is customer / student.</h1>
+    <h2>student dashboard & landing page</h2>
+    <hr>
+   
+    {% load crispy_forms_tags %}
+   
+   <form method="post" class="my-class">
+       {{ my_formset|crispy }}
+   </form>
+   <hr>
+
+
+  
+  <script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+  </script>
+   <hr>
+
 
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">

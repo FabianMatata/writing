@@ -24,7 +24,7 @@ class Assignment(models.Model):
 
 # Table with FK (Foreign Key)
 class Career(models.Model):
-    career = models.CharField(_MAX_LENGTH=50)
+    career = models.CharField(max_length=50)
     def __str__(self):
         return self.career
 

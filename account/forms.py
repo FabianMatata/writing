@@ -9,7 +9,7 @@ from crispy_forms.bootstrap import InlineRadios, FormActions
 
 from crispy_forms.layout import Submit
 
-from .models import Candidates
+from .models import Candidate
 
 class LoginForm(forms.Form): 
     username = forms.CharField(
@@ -62,18 +62,6 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2', 'is_admin', 'is_employee', 'is_customer')
 
-# class UniversityForm(forms.Form): 
-
-#     SUBJECT_CHOICES = (
-#         (1, 'web development'),
-#         (2, 'systems programming'),
-#         (3, 'data science'),
-#     )
-
-#     name = forms.CharField()
-#     age = forms.IntegerField()
-#     subject = forms.ChoiceField(choices=SUBJECT_CHOICES)
-#     date_of_birth = forms.DateField()
 
 
 class AssignmentForm(forms.ModelForm):
@@ -106,7 +94,7 @@ class AssignmentForm(forms.ModelForm):
 
 class CandidateForm(forms.ModelForm):
     class Meta:
-        model = Candidates
+        model = Candidate
         fields = ('name', 'phone', 'email','gender','career')
         labels = {
             'name':'Name',

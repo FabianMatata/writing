@@ -12,4 +12,4 @@ class CandidateAdmin(admin.ModelAdmin):
     list_per_page = 10
 
 admin.site.register(Candidate, CandidateAdmin)
-admin.site.regiter(Career)
+admin.site.register(Career)
