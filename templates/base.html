@@ -18,10 +18,32 @@
     <hr>
    
     {% load crispy_forms_tags %}
+    
    
    <form method="post" class="my-class">
        {{ my_formset|crispy }}
    </form>
+   <hr>
+   <form method="POST" autocomplete="off">
+    {% csrf_token %}
+    <!--Fields-->
+    {{ form.name|as_crispy_field }}
+    {{ form.phone|as_crispy_field }}
+    {{ form.email|as_crispy_field }}
+    {{ form.gender|as_crispy_field }}
+    {{ form.career|as_crispy_field }}
+
+    <!--buttons-->
+
+    <div class="mt-5">
+        <hr>
+        <button type="submit" class="btn btn-warning btn-width">Submit</button>
+        <button type="reset" class="btn btn-secondary ms-2 btn-width">Reset</button>
+    </div>
+</form>
+
+<hr>
+
    <hr>
 
 

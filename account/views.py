@@ -8,6 +8,8 @@ from .forms import CandidateForm
 # from core.forms import UniversityForm
 from .forms import AssignmentForm
 
+from crispy_forms.templatetags.crispy_forms_filters import as_crispy_field
+
 # Create your views here.
 
 def index(request): 
